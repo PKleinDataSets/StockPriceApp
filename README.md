@@ -22,7 +22,15 @@ Explore Interactive Charts: Visualize closing prices and volumes over time with 
 ####  Market Enthusiasts: 
 ... For individuals interested in staying updated on the historical data of their favorite stocks.
 ### Technologies Used:
-... * yfinance: Fetch stock data from Yahoo Finance.
-... * Streamlit: Create web applications with Python scripts.
-... * Pandas: Perform data manipulation and analysis.
-... * Plotly: Enable interactive data visualization.
+
+... + **yfinance**: 
+Fetch stock data from Yahoo Finance.
+
+... + **Streamlit**: 
+...Create web applications with Python scripts.
+
+... + **Pandas**:
+...Perform data manipulation and analysis.
+
+... + **Plotly**:
+...Enable interactive data visualization.
