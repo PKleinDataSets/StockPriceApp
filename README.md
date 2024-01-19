@@ -6,10 +6,13 @@ Welcome to My Stocks View, a web application designed to provide users with insi
 
 ***Interactive Charts***:
 Visualize historical stock data through interactive line charts for closing prices and volumes.
+
 ***User Input***: 
 Select your preferred stock symbol and date range to tailor the analysis to your needs.
+
 ***Powered by Streamlit***:
 Built using Streamlit, a Python library that simplifies the creation of web applications.
+
 ***Data Source***:
 Utilizes the Yahoo Finance API (yfinance) for fetching up-to-date stock information.
 
