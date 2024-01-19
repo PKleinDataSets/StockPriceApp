@@ -18,10 +18,12 @@ Utilizes the Yahoo Finance API (yfinance) for fetching up-to-date stock informat
 
 ### How to Use:
 ### Visit the My Stocks View App. Using the next link:
+
 ========
 ## LINK :
 [MyStocksViewApp](https://mystocksview.streamlit.app/)
 ========
+
 **Input the Stock Ticker Symbol**: 
 Enter the symbol of the stock you are interested in.
 
