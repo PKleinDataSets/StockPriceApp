@@ -15,8 +15,8 @@ Shown are the stock **closing** price and ***volume*** of Google!
 
 # input the start date and de end date
 
-start_date = st.date_input("Start Date", pd.to_datetime('2010-05-31'))
-end_date = st.date_input("End Date", pd.to_datetime('2020-05-31'))
+start_date = st.date_input("Start Date", pd.to_datetime('2018-01-01'))
+end_date = st.date_input("End Date", pd.to_datetime('2024-01-19'))
 
 # the user choose the simbol of the stock
 #get data on this ticker
