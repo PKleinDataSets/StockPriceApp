@@ -11,8 +11,8 @@ Shown are the stock **closing** price and ***volume*** of Google!
 """)
 
 # Input fields for the start and end dates to filter historical stock data.
-start_date = st.date_input("Start Date", pd.to_datetime('2010-05-31'))
-end_date = st.date_input("End Date", pd.to_datetime('2020-05-31'))
+start_date = st.date_input("Start Date", pd.to_datetime('2018-01-01'))
+end_date = st.date_input("End Date", pd.to_datetime('2024-01-19'))
 
 # Input field for the user to choose the stock symbol.
 tickerSymbol = st.text_input("Enter Stock Ticker Symbol", 'GOOGL')
