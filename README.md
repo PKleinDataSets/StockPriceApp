@@ -16,13 +16,12 @@ Built using Streamlit, a Python library that simplifies the creation of web appl
 ***Data Source***:
 Utilizes the Yahoo Finance API (yfinance) for fetching up-to-date stock information.
 
-======
 ### How to Use:
 ### Visit the My Stocks View App. Using the next link:
-
+========
 ## LINK :
 [MyStocksViewApp](https://mystocksview.streamlit.app/)
-
+========
 **Input the Stock Ticker Symbol**: 
 Enter the symbol of the stock you are interested in.
 
@@ -32,7 +31,7 @@ Choose the start and end dates to analyze historical stock data.
 **Explore Interactive Charts**: 
 Visualize closing prices and volumes over time with ease.
 
-======
+
 ### Potential Use Cases:
 #### Investment Research:
 ... Quickly analyze historical stock performance to aid in investment decision-making.
