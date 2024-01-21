@@ -141,12 +141,34 @@ st.write(descriptive_stats)
 st.write('''
 ## Análisis de Rentabilidad
 ''')
-# Calcular la rentabilidad total, considerando dividendos y posibles ajustes por divisiones de acciones
-total_returns = (tickerDf['Close'].iloc[-1] / tickerDf['Close'].iloc[0]) - 1
-total_returns_with_dividends = ((tickerDf['Close'].iloc[-1] + tickerDf['Dividends'].sum()) / tickerDf['Close'].iloc[0]) - 1
+# Análisis de Rentabilidad
+st.write('''
+## Análisis de Rentabilidad
+''')
+# Input para agregar múltiples acciones
+multiple_tickers_returns = {}
 
-st.write(f"Rentabilidad total (sin considerar dividendos y divisiones): {total_returns:.2%}")
-st.write(f"Rentabilidad total (considerando dividendos): {total_returns_with_dividends:.2%}")
+multiple_tickers = st.text_area("Agregar múltiples acciones (separadas por comas)", 'GOOGL, AAPL, MSFT')
+multiple_tickers = [ticker.strip().upper() for ticker in multiple_tickers.split(',')]
+
+# Calcular la rentabilidad total para cada acción
+for ticker in multiple_tickers:
+    try:
+        tickerData = yf.Ticker(ticker)
+        tickerDf = tickerData.history(period='1d', start=start_date, end=end_date)
+
+        total_returns = (tickerDf['Close'].iloc[-1] / tickerDf['Close'].iloc[0]) - 1
+        total_returns_with_dividends = ((tickerDf['Close'].iloc[-1] + tickerDf['Dividends'].sum()) / tickerDf['Close'].iloc[0]) - 1
+
+        multiple_tickers_returns[ticker] = {'Returns Without Dividends': total_returns, 'Returns With Dividends': total_returns_with_dividends}
+    except:
+        st.error(f"Error fetching data for {ticker}. Please check the ticker symbol and try again.")
+
+# Mostrar la rentabilidad total para cada acción
+for ticker, returns in multiple_tickers_returns.items():
+    st.write(f"Rentabilidad total para {ticker} (sin considerar dividendos y divisiones): {returns['Returns Without Dividends']:.2%}")
+    st.write(f"Rentabilidad total para {ticker} (considerando dividendos): {returns['Returns With Dividends']:.2%}")
+
 
 # Personalización del Gráfico
 st.write('''
