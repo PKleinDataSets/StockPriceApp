@@ -1,7 +1,7 @@
-import yfinance as yf  # Import the yfinance library for fetching stock data.
-import streamlit as st  # Import the Streamlit library for creating web applications.
-import pandas as pd  # Import the Pandas library for data manipulation and analysis.
-import plotly.express as px  # Import Plotly Express for interactive data visualization.
+import yfinance as yf
+import streamlit as st
+import pandas as pd
+import plotly.express as px
 
 # Display a heading for the web application.
 st.write("""
@@ -34,6 +34,20 @@ st.write('''
 fig_close = px.line(tickerDf, x=tickerDf.index, y='Close', title='Stock Closing Price')
 st.plotly_chart(fig_close)  # Display the closing price chart.
 
+# Media Móvil
+st.write('''
+## Media Móvil
+''')
+# Input para el período de la media móvil
+ma_period = st.slider("Seleccionar período de Media Móvil", min_value=1, max_value=100, value=20)
+
+# Calcular la media móvil de los precios de cierre
+tickerDf['Close_MA'] = tickerDf['Close'].rolling(window=ma_period).mean()
+
+# Crear gráfico con la media móvil
+fig_ma = px.line(tickerDf, x=tickerDf.index, y=['Close', 'Close_MA'], title=f'Stock Closing Price with {ma_period}-Day Moving Average')
+st.plotly_chart(fig_ma)
+
 # Display a heading for the volume section.
 st.write('''
 ## Volume
@@ -43,3 +57,33 @@ st.write('''
 fig_volume = px.line(tickerDf, x=tickerDf.index, y='Volume', title='Stock Volume')
 st.plotly_chart(fig_volume)  # Display the volume chart.
 
+# Comparación de Acciones
+st.write('''
+## Comparación de Acciones
+''')
+# Input para agregar múltiples acciones
+multiple_tickers = st.text_area("Agregar múltiples acciones (separadas por comas)", 'AAPL, MSFT, AMZN')
+multiple_tickers = [ticker.strip().upper() for ticker in multiple_tickers.split(',')]
+
+# Obtener datos históricos para las acciones adicionales
+try:
+    multiple_ticker_data = {ticker: yf.Ticker(ticker).history(period='1d', start=start_date, end=end_date) for ticker in multiple_tickers}
+except:
+    st.error("Error fetching data for additional tickers. Please check the ticker symbols and try again.")
+
+# Crear gráfico comparativo de precios de cierre
+fig_comparison_close = px.line(tickerDf, x=tickerDf.index, y='Close', title='Stock Closing Price Comparison', labels={'Close': tickerSymbol})
+for ticker, data in multiple_ticker_data.items():
+    fig_comparison_close.add_scatter(x=data.index, y=data['Close'], mode='lines', name=ticker)
+
+st.plotly_chart(fig_comparison_close)
+
+# Estadísticas Descriptivas
+st.write('''
+## Estadísticas Descriptivas
+''')
+# Calcular estadísticas descriptivas
+descriptive_stats = tickerDf[['Close', 'Volume']].describe()
+
+# Mostrar las estadísticas descriptivas
+st.write(descriptive_stats)
